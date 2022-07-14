@@ -1,0 +1,45 @@
+package com.nttdata.BC21.Transaction.api;
+
+import com.nttdata.BC21.Transaction.model.TransactionActProCreCarBusCli;
+import com.nttdata.BC21.Transaction.request.TransactionActProCreCarBusCliRequest;
+import com.nttdata.BC21.Transaction.service.ITransactionActProCreCarBusCliService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/api/transaction/active/credit-card/business")
+public class TrasactionActProCreCarBusCliApi {
+
+    @Autowired
+    private ITransactionActProCreCarBusCliService transactionActProCreCarBusCliService;
+
+    @PostMapping
+    public Mono<TransactionActProCreCarBusCli> create(@RequestBody TransactionActProCreCarBusCliRequest transactionActProCreCarBusCliRequest){
+        return transactionActProCreCarBusCliService.create(transactionActProCreCarBusCliRequest);
+    }
+
+    @PutMapping
+    public Mono<TransactionActProCreCarBusCli> update(@RequestBody TransactionActProCreCarBusCli transactionActProCreCarBusCli){
+        return transactionActProCreCarBusCliService.update(transactionActProCreCarBusCli);
+    }
+
+    @GetMapping
+    public Flux<TransactionActProCreCarBusCli> findAll(){
+        return transactionActProCreCarBusCliService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Mono<TransactionActProCreCarBusCli> findById(@PathVariable String id){ return transactionActProCreCarBusCliService.findById(id); }
+
+    @GetMapping("/find/{idActProCreCarBusCli}")
+    public Flux<TransactionActProCreCarBusCli> findByIdActProCreCarBusCli(@PathVariable String idActProCreCarBusCli){
+        return transactionActProCreCarBusCliService.findByIdActProCreCarBusCli(idActProCreCarBusCli);
+    }
+
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable String id){
+        return transactionActProCreCarBusCliService.deleteById(id);
+    }
+}
